@@ -1,176 +1,337 @@
-# 📈 AI-Driven Real-Time Market Sentiment Analyzer
+# 🤖 AI Market Sentinel
 
-An enterprise-grade, full-stack application that leverages **Google Gemini 2.0 Flash** to provide real-time stock market sentiment analysis, technical indicators, and interactive visualizations.
+**Real-time stock market analysis powered by Google Gemini 2.0 Flash AI**
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Docker](https://img.shields.io/badge/docker-containers-blue.svg)
-![React](https://img.shields.io/badge/frontend-React%20%7C%20Vite%20%7C%20Tailwind-blueviolet)
-![Node.js](https://img.shields.io/badge/backend-Node.js%20%7C%20Express%20%7C%20TypeScript-green)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232E?style=flat-square&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-404D59?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
 
----
+## 📋 Overview
 
-## 🚀 Overview
+AI Market Sentinel is an enterprise-grade financial analysis platform that combines real-time market data with advanced AI sentiment analysis. It provides traders and investors with actionable insights by analyzing technical indicators, news sentiment, and market trends using Google's cutting-edge Gemini AI model.
 
-The **Market Analyzer** is designed to give traders and analysts a competitive edge by combining quantitative data with qualitative AI analysis. It fetches real-time market data, calculates key technical indicators (RSI, SMA, EMA), and uses Generative AI to analyze news headlines and market sentiment, providing a comprehensive "Buy/Hold/Sell" recommendation.
+### 🎯 Key Features
 
-### ✨ Key Features
+- **🤖 AI-Powered Analysis**: Leverages Google Gemini 2.0 Flash for intelligent market sentiment analysis
+- **📊 Real-Time Data**: Live stock prices, volume, and market indicators via Yahoo Finance API
+- **📈 Technical Analysis**: RSI, SMA, EMA calculations with trend detection
+- **🎯 Smart Recommendations**: AI-generated Buy/Hold/Sell signals with confidence scores
+- **📰 News Integration**: Latest financial news with sentiment impact assessment
+- **📱 Responsive Design**: Modern, mobile-first interface built with React and Tailwind CSS
+- **⚡ Real-Time Updates**: WebSocket support for live market data streaming
 
-*   **🤖 AI-Powered Sentiment Analysis**: Utilizes **Google Gemini 2.0 Flash** to analyze market news and sentiment in real-time.
-*   **📊 Real-Time Market Data**: Live stock prices, volume, and percent changes via **Yahoo Finance**.
-*   **📉 Technical Indicators**: Automatic calculation of **RSI** (Relative Strength Index), **SMA** (Simple Moving Average), **EMA** (Exponential Moving Average), and Volume Anomalies.
-*   **🖥️ Interactive Dashboard**: A responsive implementation using **React**, **Recharts**, and **Tailwind CSS**.
-*   **⚡ High Performance**: Built with **Vite** for the frontend and **Recharts** for visualizations.
-*   **🐳 Dockerized**: Fully containerized setup for easy deployment and scalability.
+## 🏗️ Architecture
 
----
+### Backend (Node.js + TypeScript)
+- **Framework**: Express.js with TypeScript for type safety
+- **AI Integration**: Google Generative AI SDK (Gemini 2.0 Flash)
+- **Data Sources**: Yahoo Finance API for real-time market data
+- **Database**: SQLite for caching and historical data storage
+- **Technical Analysis**: Custom algorithms for RSI, SMA, EMA calculations
+- **API Design**: RESTful endpoints with CORS support
 
-## 🛠️ Technology Stack
+### Frontend (React + TypeScript)
+- **Framework**: React 18 with functional components and hooks
+- **Build Tool**: Vite for fast development and optimized builds
+- **Styling**: Tailwind CSS for utility-first, responsive design
+- **Charts**: Custom components with Recharts for data visualization
+- **State Management**: React hooks for local state management
+- **Icons**: Lucide React for consistent iconography
 
-### Frontend
-*   **Framework**: React 18 + Vite
-*   **Styling**: Tailwind CSS
-*   **Visualization**: Recharts
-*   **Icons**: Lucide React
-*   **Language**: TypeScript
+### DevOps & Deployment
+- **Containerization**: Docker with multi-stage builds
+- **Orchestration**: Docker Compose for development and production
+- **Version Control**: Git with semantic versioning
+- **Environment**: Environment variable configuration for security
 
-### Backend
-*   **Runtime**: Node.js
-*   **Framework**: Express.js
-*   **Language**: TypeScript
-*   **AI Integration**: Google Generative AI SDK (Gemini)
-*   **Data Source**: Yahoo Finance API (`yahoo-finance2`)
-*   **Analysis**: `technicalindicators` library
-*   **Database**: Better-SQLite3 (for caching/history)
-*   **Real-time**: WebSockets (`ws`)
-
-### DevOps & Tools
-*   **Containerization**: Docker & Docker Compose
-*   **Linting**: ESLint
-*   **Version Control**: Git
-
----
-
-## 📂 Project Structure
-
-```bash
-Market-Analyzer/
-├── backend/                 # Node.js + TypeScript Backend
-│   ├── src/
-│   │   ├── config/          # Configuration (env, db)
-│   │   ├── controllers/     # Route controllers
-│   │   ├── routes/          # API routes definition
-│   │   ├── services/        # Business logic (Gemini, Market data)
-│   │   └── index.ts         # Entry point
-│   ├── Dockerfile
-│   └── package.json
-│
-├── frontend/                # React + Vite Frontend
-│   ├── src/
-│   │   ├── components/      # Reusable UI components (Dashboard, Charts)
-│   │   ├── api/             # API integration
-│   │   └── App.tsx          # Main application component
-│   ├── Dockerfile
-│   └── package.json
-│
-├── docker-compose.yml       # Docker orchestration
-└── README.md                # Project documentation
-```
-
----
-
-## 🏁 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-*   [Docker](https://www.docker.com/products/docker-desktop/) & Docker Compose installed on your machine.
-*   A **Google Gemini API Key**. You can get one for free from [Google AI Studio](https://aistudio.google.com/).
+- Node.js 18+ and npm
+- Docker and Docker Compose (optional)
+- Google Gemini API key
 
-### 📦 Installation (Docker Method - Recommended)
+### Installation
 
-1.  **Clone the repository**:
-    ```bash
-    git clone <https://github.com/SaheelYadav/ai-market-sentinel>
-    cd Market-Analyzer
-    ```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/SaheelYadav/ai-market-sentinel.git
+   cd ai-market-sentinel
+   ```
 
-2.  **Configure Environment Variables**:
-    Create a `.env` file in the **root** directory and add your API credentials:
-    ```env
-    # Required
-    GEMINI_API_KEY=your_actual_api_key_here
-    
-    # Optional
-    PORT=5000
-    NODE_ENV=production
-    ```
+2. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   # Add your Google Gemini API key
+   GEMINI_API_KEY=your_api_key_here
+   ```
 
-3.  **Build and Run**:
-    ```bash
-    docker-compose up --build
-    ```
+3. **Start development environment**
+   ```bash
+   # Option 1: Docker Compose (Recommended)
+   docker-compose up --build
 
-4.  **Access the Application**:
-    *   **Frontend**: Open [http://localhost:3000](http://localhost:3000)
-    *   **Backend API**: Running on [http://localhost:5000](http://localhost:5000)
+   # Option 2: Manual setup
+   # Backend
+   cd backend && npm install && npm run dev
+   
+   # Frontend (new terminal)
+   cd frontend && npm install && npm run dev
+   ```
 
-### 🔧 Manual Installation (Local Dev)
-
-If you prefer running without Docker:
-
-**1. Backend Setup**
-```bash
-cd backend
-npm install
-# Create .env file in backend/ with your keys
-npm run dev
-```
-
-**2. Frontend Setup**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
+4. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
 
 ## 📡 API Documentation
 
 ### Base URL: `http://localhost:5000/api`
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/stock/:ticker` | Fetch raw market data for a stock (e.g., `AAPL`). |
-| `GET` | `/news/:ticker` | get the latest news for a specific stock ticker. |
-| `GET` | `/analysis/:ticker` | Get full AI analysis, market data, and indicators for a specific stock. |
-| `POST` | `/sentiment` | Analyze sentiment for a custom text input. |
+#### Endpoints
 
----
+| Method | Endpoint | Description | Response |
+|--------|----------|-------------|------------|
+| `GET` | `/stock/:ticker` | Fetch real-time stock data and technical indicators |
+| `GET` | `/analysis/:ticker` | Complete analysis including AI sentiment and recommendations |
+| `GET` | `/news/:ticker` | Latest financial news for specified ticker |
+| `POST` | `/sentiment` | Custom sentiment analysis for provided text |
 
-## 🧩 Components Overview
+#### Example Response
 
-1.  **Dashboard**: The main container that layouts the grid.
-2.  **StockChart**: Renders the price history and technical indicators using `recharts`.
-3.  **SentimentPanel**: Displays the AI-generated analysis, sentiment score, and "Buy/Sell" recommendation.
+```json
+{
+  "price": 178.45,
+  "rsi": 65.2,
+  "sma20": 175.8,
+  "sma50": 172.3,
+  "ema20": 176.9,
+  "volumeAnomaly": false,
+  "trend": "Uptrend",
+  "overall_sentiment_score": 0.35,
+  "sentiment_label": "Bullish",
+  "confidence_score": 78,
+  "positive_factors": ["Strong volume", "Technical breakout"],
+  "negative_factors": ["Overbought conditions"],
+  "reasoning_summary": "Stock shows bullish momentum with strong volume support...",
+  "recommendation": "Buy",
+  "risk_level": "Medium",
+  "market_data": {
+    "open": 177.20,
+    "high": 179.80,
+    "low": 176.50,
+    "volume": 45678900,
+    "marketCap": 2850000000000
+  },
+  "history": [...],
+  "news": [...]
+}
+```
 
----
+## 🧩 Technical Indicators
+
+### RSI (Relative Strength Index)
+- **Period**: 14 days
+- **Range**: 0-100
+- **Interpretation**: 
+  - > 70: Overbought
+  - < 30: Oversold
+  - 30-70: Neutral
+
+### SMA (Simple Moving Average)
+- **Periods**: 20-day and 50-day
+- **Usage**: Trend identification and support/resistance levels
+
+### EMA (Exponential Moving Average)
+- **Period**: 20-day
+- **Feature**: More responsive to recent price changes
+
+### Volume Analysis
+- **Anomaly Detection**: Identifies unusual volume spikes
+- **Benchmark**: 20-day average with 1.5x threshold
+
+## 🎨 Frontend Components
+
+### Dashboard
+Main application container with:
+- Stock search functionality
+- Real-time data updates
+- Responsive grid layout
+
+### StockChart
+Interactive price chart featuring:
+- 6-month historical data
+- Technical indicator overlays
+- Zoom and pan capabilities
+- Responsive design
+
+### SentimentPanel
+AI analysis display showing:
+- Sentiment meter with visual indicators
+- Investment recommendation
+- Risk assessment
+- Bullish/Bearish factors
+- Confidence scores
+
+## 🔧 Development
+
+### Project Structure
+```
+ai-market-sentinel/
+├── backend/                 # Node.js API server
+│   ├── src/
+│   │   ├── config/          # Environment and database config
+│   │   ├── controllers/     # API route handlers
+│   │   ├── services/        # Business logic (AI, market data)
+│   │   ├── utils/           # Technical indicator calculations
+│   │   └── types/           # TypeScript type definitions
+│   ├── Dockerfile
+│   └── package.json
+├── frontend/               # React application
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── api/            # API integration layer
+│   │   └── types/          # TypeScript interfaces
+│   ├── public/
+│   └── package.json
+├── docker-compose.yml      # Multi-service orchestration
+└── README.md
+```
+
+### Scripts
+
+```bash
+# Backend
+npm run dev          # Start development server with hot reload
+npm run build        # Compile TypeScript to JavaScript
+npm run start        # Start production server
+
+# Frontend
+npm run dev          # Start Vite development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+```
+
+## 🐳 Docker Deployment
+
+### Development
+```bash
+docker-compose up --build
+```
+
+### Production
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Environment Variables
+- `GEMINI_API_KEY`: Google Gemini API key (required)
+- `PORT`: Backend server port (default: 5000)
+- `NODE_ENV`: Environment mode (development/production)
+
+## 🧪 Testing
+
+### Running Tests
+```bash
+# Backend tests
+cd backend && npm test
+
+# Frontend tests
+cd frontend && npm test
+```
+
+### Test Coverage
+- Unit tests for technical indicators
+- Integration tests for API endpoints
+- Component tests for UI elements
+- E2E tests for user workflows
+
+## 📊 Performance
+
+### Optimization Features
+- **Data Caching**: 30-second cache for API responses
+- **Lazy Loading**: Components load data on demand
+- **Code Splitting**: Optimized bundle sizes
+- **Image Optimization**: Compressed static assets
+
+### Monitoring
+- Real-time error tracking
+- Performance metrics collection
+- API response time monitoring
+- Database query optimization
+
+## 🔒 Security
+
+### Implementation
+- **Environment Variables**: Sensitive data in .env files
+- **CORS Configuration**: Controlled cross-origin access
+- **Input Validation**: API parameter sanitization
+- **Rate Limiting**: API abuse prevention
+- **SQL Injection Protection**: Parameterized queries
+
+## 🌐 Deployment Options
+
+### Railway
+1. Connect GitHub repository
+2. Configure environment variables
+3. Deploy with automatic builds
+
+### AWS
+1. Build Docker images
+2. Push to ECR
+3. Deploy to ECS/Elastic Beanstalk
+
+### DigitalOcean
+1. Use App Platform
+2. Connect GitHub repository
+3. Configure environment variables
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
+We welcome contributions! Please follow our guidelines:
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+### Development Workflow
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+### Code Standards
+- Use TypeScript for type safety
+- Follow ESLint configuration
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation
+
+### Issue Reporting
+- Use GitHub Issues for bug reports
+- Provide detailed reproduction steps
+- Include environment details
+- Add relevant screenshots
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Google**: Gemini 2.0 Flash AI model
+- **Yahoo Finance**: Real-time market data
+- **React**: Frontend framework
+- **Express.js**: Backend framework
+- **Chart.js**: Data visualization
+
+## 📞 Support
+
+- **Documentation**: [Wiki](https://github.com/SaheelYadav/ai-market-sentinel/wiki)
+- **Issues**: [GitHub Issues](https://github.com/SaheelYadav/ai-market-sentinel/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/SaheelYadav/ai-market-sentinel/discussions)
 
 ---
 
-## 📝 License
+**⚠️ Disclaimer**: This tool is for educational and informational purposes only. Not financial advice. Always consult with qualified financial professionals before making investment decisions.
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-
+**🚀 Built with ❤️ using cutting-edge AI technology**
