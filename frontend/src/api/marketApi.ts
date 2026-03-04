@@ -2,7 +2,9 @@ import axios from 'axios';
 import { AnalysisResult } from '../types';
 
 const api = axios.create({
-    baseURL: '/api', // Proxy handles this
+    baseURL: process.env.NODE_ENV === 'production' 
+        ? 'https://your-backend-url.railway.app/api' 
+        : '/api', // Local development proxy
     headers: {
         'Content-Type': 'application/json',
     },
