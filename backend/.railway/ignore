@@ -1,9 +1,0 @@
-# Ignore everything except what we need for backend deployment
-*
-!package.json
-!package-lock.json
-!tsconfig.json
-!src/
-!Dockerfile
-!Procfile
-!.railway/
