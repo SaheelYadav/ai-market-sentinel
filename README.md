@@ -1,49 +1,52 @@
-# 🤖 AI-Driven Real-Time Market Sentiment Analyzer
+# 📈 AI-Driven Real-Time Market Sentiment Analyzer
 
-An enterprise-grade AI application that leverages **Google Gemini 2.0 Flash** to provide real-time stock market sentiment analysis, technical indicators, and interactive visualizations.
+An enterprise-grade, full-stack application that leverages **Google Gemini 2.0 Flash** to provide real-time stock market sentiment analysis, technical indicators, and interactive visualizations.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Hugging Face](https://img.shields.io/badge/platform-Hugging%20Face-yellow.svg)
-![Gradio](https://img.shields.io/badge/interface-Gradio%20%7C%20Plotly-orange)
-![Python](https://img.shields.io/badge/language-Python%20%7C%20Flask-blue)
+![Docker](https://img.shields.io/badge/docker-containers-blue.svg)
+![React](https://img.shields.io/badge/frontend-React%20%7C%20Vite%20%7C%20Tailwind-blueviolet)
+![Node.js](https://img.shields.io/badge/backend-Node.js%20%7C%20Express%20%7C%20TypeScript-green)
 
 ---
 
 ## 🚀 Overview
 
-The **AI Market Analyzer** is designed to give traders and analysts a competitive edge by combining quantitative data with qualitative AI analysis. It fetches real-time market data, calculates key technical indicators (RSI, SMA, EMA), and uses Generative AI to analyze market sentiment, providing comprehensive "Buy/Hold/Sell" recommendations.
+The **Market Analyzer** is designed to give traders and analysts a competitive edge by combining quantitative data with qualitative AI analysis. It fetches real-time market data, calculates key technical indicators (RSI, SMA, EMA), and uses Generative AI to analyze news headlines and market sentiment, providing a comprehensive "Buy/Hold/Sell" recommendation.
 
 ### ✨ Key Features
 
-*   **🤖 AI-Powered Sentiment Analysis**: Utilizes **Google Gemini 2.0 Flash** to analyze market sentiment in real-time.
+*   **🤖 AI-Powered Sentiment Analysis**: Utilizes **Google Gemini 2.0 Flash** to analyze market news and sentiment in real-time.
 *   **📊 Real-Time Market Data**: Live stock prices, volume, and percent changes via **Yahoo Finance**.
-*   **📉 Technical Indicators**: Automatic calculation of **RSI** (Relative Strength Index), **SMA** (Simple Moving Average), **EMA** (Exponential Moving Average).
-*   **🖥️ Interactive Dashboard**: Beautiful interface using **Gradio** and **Plotly**.
-*   **⚡ High Performance**: Optimized Python backend with Flask.
-*   **🤗 Hugging Face Ready**: Deploy instantly on Hugging Face Spaces.
+*   **📉 Technical Indicators**: Automatic calculation of **RSI** (Relative Strength Index), **SMA** (Simple Moving Average), **EMA** (Exponential Moving Average), and Volume Anomalies.
+*   **🖥️ Interactive Dashboard**: A responsive implementation using **React**, **Recharts**, and **Tailwind CSS**.
+*   **⚡ High Performance**: Built with **Vite** for the frontend and **Recharts** for visualizations.
+*   **🐳 Dockerized**: Fully containerized setup for easy deployment and scalability.
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Backend
-*   **Runtime**: Python 3.9+
-*   **Framework**: Flask
-*   **AI Integration**: Google Generative AI SDK (Gemini)
-*   **Data Source**: Yahoo Finance (`yfinance`)
-*   **Analysis**: Pandas & NumPy for calculations
-*   **API**: RESTful endpoints with CORS support
-
 ### Frontend
-*   **Interface**: Gradio 4.7+
-*   **Visualization**: Plotly for interactive charts
-*   **Styling**: Gradio Soft theme
-*   **Real-time**: Live data updates
+*   **Framework**: React 18 + Vite
+*   **Styling**: Tailwind CSS
+*   **Visualization**: Recharts
+*   **Icons**: Lucide React
+*   **Language**: TypeScript
 
-### Deployment
-*   **Platform**: Hugging Face Spaces
-*   **Hardware**: CPU Basic (free) or GPU T4
-*   **Environment**: Python with pip dependencies
+### Backend
+*   **Runtime**: Node.js
+*   **Framework**: Express.js
+*   **Language**: TypeScript
+*   **AI Integration**: Google Generative AI SDK (Gemini)
+*   **Data Source**: Yahoo Finance API (`yahoo-finance2`)
+*   **Analysis**: `technicalindicators` library
+*   **Database**: Better-SQLite3 (for caching/history)
+*   **Real-time**: WebSockets (`ws`)
+
+### DevOps & Tools
+*   **Containerization**: Docker & Docker Compose
+*   **Linting**: ESLint
+*   **Version Control**: Git
 
 ---
 
@@ -51,11 +54,26 @@ The **AI Market Analyzer** is designed to give traders and analysts a competitiv
 
 ```bash
 Market-Analyzer/
-├── backend.py              # Flask backend with Gemini integration
-├── gradio_app.py          # Gradio frontend interface
-├── requirements.txt       # Python dependencies
-├── .env                   # Environment variables (gitignored)
-└── README.md             # Project documentation
+├── backend/                 # Node.js + TypeScript Backend
+│   ├── src/
+│   │   ├── config/          # Configuration (env, db)
+│   │   ├── controllers/     # Route controllers
+│   │   ├── routes/          # API routes definition
+│   │   ├── services/        # Business logic (Gemini, Market data)
+│   │   └── index.ts         # Entry point
+│   ├── Dockerfile
+│   └── package.json
+│
+├── frontend/                # React + Vite Frontend
+│   ├── src/
+│   │   ├── components/      # Reusable UI components (Dashboard, Charts)
+│   │   ├── api/             # API integration
+│   │   └── App.tsx          # Main application component
+│   ├── Dockerfile
+│   └── package.json
+│
+├── docker-compose.yml       # Docker orchestration
+└── README.md                # Project documentation
 ```
 
 ---
@@ -64,64 +82,55 @@ Market-Analyzer/
 
 ### Prerequisites
 
-*   Python 3.9 or higher
-*   A **Google Gemini API Key**. Get one free from [Google AI Studio](https://aistudio.google.com/).
+*   [Docker](https://www.docker.com/products/docker-desktop/) & Docker Compose installed on your machine.
+*   A **Google Gemini API Key**. You can get one for free from [Google AI Studio](https://aistudio.google.com/).
 
-### 📦 Local Installation
+### 📦 Installation (Docker Method - Recommended)
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/SaheelYadav/ai-market-sentinel.git
-    cd ai-market-sentinel
+    git clone <https://github.com/SaheelYadav/ai-market-sentinel>
+    cd Market-Analyzer
     ```
 
-2.  **Create virtual environment**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
-
-3.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Configure Environment Variables**:
-    Create a `.env` file and add:
+2.  **Configure Environment Variables**:
+    Create a `.env` file in the **root** directory and add your API credentials:
     ```env
+    # Required
     GEMINI_API_KEY=your_actual_api_key_here
+    
+    # Optional
+    PORT=5000
+    NODE_ENV=production
     ```
 
-5.  **Run the application**:
+3.  **Build and Run**:
     ```bash
-    python gradio_app.py
+    docker-compose up --build
     ```
 
-6.  **Access the Application**:
-    Open [http://localhost:7860](http://localhost:7860)
+4.  **Access the Application**:
+    *   **Frontend**: Open [http://localhost:3000](http://localhost:3000)
+    *   **Backend API**: Running on [http://localhost:5000](http://localhost:5000)
 
----
+### 🔧 Manual Installation (Local Dev)
 
-## 🤗 Hugging Face Deployment
+If you prefer running without Docker:
 
-### One-Click Deployment
+**1. Backend Setup**
+```bash
+cd backend
+npm install
+# Create .env file in backend/ with your keys
+npm run dev
+```
 
-1. **Open in Hugging Face Spaces**:
-   [![Hugging Face Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces)
-
-2. **Create new Space**:
-   - SDK: **Gradio**
-   - Hardware: **CPU Basic** (free) or **GPU T4**
-   - Repository: Your GitHub repo
-
-3. **Set Environment Variables**:
-   - `GEMINI_API_KEY`: Your Google Gemini API key
-
-4. **Deploy** - Takes ~3 minutes!
-
-### Manual Deployment
-
-See [HF_SPACES.md](./HF_SPACES.md) for detailed instructions.
+**2. Frontend Setup**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
 ---
 
@@ -131,55 +140,30 @@ See [HF_SPACES.md](./HF_SPACES.md) for detailed instructions.
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/stock/:ticker` | Fetch raw market data for a stock |
-| `GET` | `/analysis/:ticker` | Get full AI analysis and indicators |
-| `POST` | `/sentiment` | Analyze sentiment for custom text |
+| `GET` | `/stock/:ticker` | Fetch raw market data for a stock (e.g., `AAPL`). |
+| `GET` | `/news/:ticker` | get the latest news for a specific stock ticker. |
+| `GET` | `/analysis/:ticker` | Get full AI analysis, market data, and indicators for a specific stock. |
+| `POST` | `/sentiment` | Analyze sentiment for a custom text input. |
 
 ---
 
-## 🧩 Features Overview
+## 🧩 Components Overview
 
-1.  **AI Analysis**: Gemini-powered sentiment and recommendations
-2.  **Technical Indicators**: RSI, SMA, EMA calculations
-3.  **Interactive Charts**: 30-day price history with Plotly
-4.  **Real-time Data**: Live market data from Yahoo Finance
-5.  **Beautiful UI**: Modern Gradio interface with emojis
-
----
-
-## 🎯 Usage Examples
-
-### Analyze a Stock
-```python
-import requests
-
-# Get Apple analysis
-response = requests.get('http://localhost:5000/api/analysis/AAPL')
-data = response.json()
-
-print(f"Recommendation: {data['sentiment']['recommendation']}")
-print(f"Sentiment: {data['sentiment']['sentiment']}")
-print(f"Price: ${data['price']}")
-```
-
-### Custom Sentiment Analysis
-```python
-response = requests.post('http://localhost:5000/api/sentiment', 
-                        json={'text': 'Apple stock is looking strong today'})
-data = response.json()
-```
+1.  **Dashboard**: The main container that layouts the grid.
+2.  **StockChart**: Renders the price history and technical indicators using `recharts`.
+3.  **SentimentPanel**: Displays the AI-generated analysis, sentiment score, and "Buy/Sell" recommendation.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! Please fork and submit a pull request.
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
 1.  Fork the Project
-2.  Create Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit Changes (`git commit -m 'Add AmazingFeature'`)
-4.  Push to Branch (`git push origin feature/AmazingFeature`)
-5.  Open Pull Request
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ---
 
@@ -189,18 +173,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## ⚠️ Disclaimer
 
-**This tool is for educational purposes only and should not be considered financial advice. Always consult with a qualified financial advisor before making investment decisions.**
-
----
-
-## 🔗 Links
-
-- **Live Demo**: [Hugging Face Spaces](https://huggingface.co/spaces)
-- **API Documentation**: [Google Gemini](https://ai.google.dev/)
-- **Data Source**: [Yahoo Finance](https://finance.yahoo.com/)
-
----
-
-**Made with ❤️ using Google Gemini 2.0 Flash**
