@@ -84,6 +84,21 @@ export async function analyzeMarketSentiment(
 
     } catch (error) {
         console.error('Error in Gemini analysis service:', error);
+        
+        // Check for rate limiting
+        if (error.status === 429) {
+            return {
+                overall_sentiment_score: 0,
+                sentiment_label: 'Neutral',
+                confidence_score: 0,
+                positive_factors: ['Rate limited by AI service'],
+                negative_factors: ['AI service temporarily unavailable'],
+                reasoning_summary: 'AI analysis temporarily unavailable due to rate limits. Please try again in a few minutes.',
+                recommendation: 'Hold',
+                risk_level: 'Medium'
+            };
+        }
+        
         // Return a graceful fallback instead of crashing
         return {
             overall_sentiment_score: 0,

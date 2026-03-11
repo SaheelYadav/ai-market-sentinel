@@ -10,10 +10,22 @@ interface CacheEntry<T> {
 const cache = new Map<string, CacheEntry<any>>();
 const CACHE_TTL = 30 * 1000; // 30 seconds
 
+// Validate ticker format
+function isValidTicker(ticker: string): boolean {
+    // Check if ticker is 1-5 letters, numbers, or dots
+    const tickerRegex = /^[A-Z0-9.]{1,5}$/;
+    return tickerRegex.test(ticker.toUpperCase());
+}
+
 // ===============================
 // 📈 Get Real-Time Stock Quote
 // ===============================
 export async function getStockQuote(ticker: string) {
+    // Validate ticker format
+    if (!isValidTicker(ticker)) {
+        throw new Error(`Invalid ticker format: ${ticker}. Stock symbols should be 1-5 characters (letters, numbers, or dots).`);
+    }
+
     const cacheKey = `quote_${ticker}`;
 
     if (cache.has(cacheKey)) {
@@ -35,7 +47,7 @@ export async function getStockQuote(ticker: string) {
 
     } catch (error) {
         console.error(`Error fetching quote for ${ticker}:`, error);
-        throw new Error('Failed to fetch stock quote');
+        throw new Error(`Invalid stock ticker: ${ticker}. Please enter a valid stock symbol.`);
     }
 }
 
@@ -43,6 +55,11 @@ export async function getStockQuote(ticker: string) {
 // 📊 Get 6 Months Historical Data
 // =====================================
 export async function getHistoricalData(ticker: string) {
+    // Validate ticker format
+    if (!isValidTicker(ticker)) {
+        throw new Error(`Invalid ticker format: ${ticker}. Stock symbols should be 1-5 characters (letters, numbers, or dots).`);
+    }
+
     const cacheKey = `history_${ticker}`;
 
     if (cache.has(cacheKey)) {
@@ -71,7 +88,7 @@ export async function getHistoricalData(ticker: string) {
 
     } catch (error) {
         console.error(`Error fetching historical data for ${ticker}:`, error);
-        throw new Error('Failed to fetch historical data');
+        throw new Error(`Unable to fetch historical data for ${ticker}. Please verify the stock symbol.`);
     }
 }
 
@@ -80,6 +97,11 @@ export async function getHistoricalData(ticker: string) {
 // 📰 Get Latest Stock News
 // =====================================
 export async function getStockNews(ticker: string) {
+    // Validate ticker format
+    if (!isValidTicker(ticker)) {
+        throw new Error(`Invalid ticker format: ${ticker}. Stock symbols should be 1-5 characters (letters, numbers, or dots).`);
+    }
+
     const cacheKey = `news_${ticker}`;
 
     if (cache.has(cacheKey)) {
@@ -101,6 +123,6 @@ export async function getStockNews(ticker: string) {
 
     } catch (error) {
         console.error(`Error fetching news for ${ticker}:`, error);
-        throw new Error('Failed to fetch news');
+        throw new Error(`Unable to fetch news for ${ticker}. Please verify the stock symbol.`);
     }
 }
