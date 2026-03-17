@@ -20,8 +20,12 @@ const Dashboard: React.FC = () => {
             const result = await getMarketAnalysis(ticker);
             setData(result);
         } catch (err: any) {
-            console.error(err);
-            setError(err.response?.data?.error || 'Failed to fetch analysis');
+            console.error('Dashboard fetch error:', err);
+            const errorMessage = err.response?.data?.error || err.message || 'Failed to fetch analysis';
+            setError(errorMessage);
+            
+            // Don't keep loading state on error
+            setLoading(false);
         } finally {
             setLoading(false);
         }

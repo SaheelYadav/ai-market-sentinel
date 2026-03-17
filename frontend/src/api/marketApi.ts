@@ -12,19 +12,53 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    timeout: 30000, // 30 second timeout
 });
 
+// Add request interceptor for better error handling
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        console.error('API Error:', error);
+        if (error.code === 'ECONNABORTED') {
+            throw new Error('Request timeout - please try again');
+        }
+        if (error.response?.status === 429) {
+            throw new Error('Too many requests - please wait a moment');
+        }
+        if (error.response?.status >= 500) {
+            throw new Error('Server error - please try again later');
+        }
+        throw error;
+    }
+);
+
 export const getMarketAnalysis = async (ticker: string) => {
-    const response = await api.get<AnalysisResult>(`/analysis/${ticker}`);
-    return response.data;
+    try {
+        const response = await api.get<AnalysisResult>(`/analysis/${ticker}`);
+        return response.data;
+    } catch (error: any) {
+        console.error('Market Analysis API Error:', error);
+        throw error;
+    }
 };
 
 export const getStockData = async (ticker: string) => {
-    const response = await api.get(`/stock/${ticker}`);
-    return response.data;
+    try {
+        const response = await api.get(`/stock/${ticker}`);
+        return response.data;
+    } catch (error: any) {
+        console.error('Stock Data API Error:', error);
+        throw error;
+    }
 };
 
 export const getStockNews = async (ticker: string) => {
-    const response = await api.get(`/news/${ticker}`);
-    return response.data;
+    try {
+        const response = await api.get(`/news/${ticker}`);
+        return response.data;
+    } catch (error: any) {
+        console.error('Stock News API Error:', error);
+        throw error;
+    }
 };
