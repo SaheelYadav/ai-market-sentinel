@@ -11,6 +11,11 @@ app.use(express.json());
 // Routes
 app.use('/api', apiRoutes);
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
 // Error Handling Middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
