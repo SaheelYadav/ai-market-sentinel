@@ -85,6 +85,20 @@ export async function analyzeMarketSentiment(
     } catch (error) {
         console.error('Error in Gemini analysis service:', error);
         
+        // Check for missing API key
+        if (error.message?.includes('API_KEY') || error.status === 400) {
+            return {
+                overall_sentiment_score: 0,
+                sentiment_label: 'Neutral',
+                confidence_score: 0,
+                positive_factors: ['Configuration needed'],
+                negative_factors: ['API key not configured'],
+                reasoning_summary: 'AI analysis service is not properly configured. Please check environment variables.',
+                recommendation: 'Hold',
+                risk_level: 'High'
+            };
+        }
+        
         // Check for rate limiting
         if (error.status === 429) {
             return {
