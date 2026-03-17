@@ -5,7 +5,7 @@ import { AnalysisResult } from '../types';
 const isDevelopment = import.meta.env.DEV;
 const backendUrl = isDevelopment 
   ? 'http://localhost:5000/api'  // Development backend
-  : 'https://ai-market-sentinel-backend.onrender.com/api'; // Production backend (update this URL)
+  : 'https://ai-market-sentinel.onrender.com/api'; // Production backend on Render
 
 const api = axios.create({
     baseURL: isDevelopment ? '/api' : backendUrl,
