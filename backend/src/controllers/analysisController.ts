@@ -11,12 +11,17 @@ export const analyzeStock = async (req: Request, res: Response): Promise<void> =
             return;
         }
 
+        console.log(`🔍 Starting analysis for ticker: ${ticker}`);
+
         // 1. Fetch Data
+        console.log(`📊 Fetching market data for ${ticker}...`);
         const [quote, history, news] = await Promise.all([
             marketService.getStockQuote(ticker),
             marketService.getHistoricalData(ticker),   // ✅ FIXED
             marketService.getStockNews(ticker)
         ]);
+
+        console.log(`✅ Market data fetched successfully for ${ticker}`);
 
         if (!history || history.length < 50) {
             res.status(400).json({ error: 'Not enough historical data for analysis' });
@@ -65,8 +70,21 @@ export const analyzeStock = async (req: Request, res: Response): Promise<void> =
         res.json(result);
 
     } catch (error) {
-        console.error('Error analyzing stock:', error);
-        res.status(500).json({ error: 'Analysis failed' });
+        console.error('❌ Error analyzing stock:', error);
+        console.error('Error details:', {
+            message: error?.message,
+            stack: error?.stack,
+            name: error?.name,
+            ticker: req.params?.ticker
+        });
+        
+        // Send more specific error message
+        const errorMessage = error?.message || 'Unknown error occurred';
+        res.status(500).json({ 
+            error: 'Analysis failed', 
+            details: errorMessage,
+            ticker: req.params?.ticker
+        });
     }
 };
 
