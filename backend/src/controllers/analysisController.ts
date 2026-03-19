@@ -15,13 +15,48 @@ export const analyzeStock = async (req: Request, res: Response): Promise<void> =
 
         // 1. Fetch Data
         console.log(`📊 Fetching market data for ${ticker}...`);
-        const [quote, history, news] = await Promise.all([
-            marketService.getStockQuote(ticker),
-            marketService.getHistoricalData(ticker),   // ✅ FIXED
-            marketService.getStockNews(ticker)
-        ]);
-
-        console.log(`✅ Market data fetched successfully for ${ticker}`);
+        
+        let quote, history, news;
+        try {
+            [quote, history, news] = await Promise.all([
+                marketService.getStockQuote(ticker),
+                marketService.getHistoricalData(ticker),   // ✅ FIXED
+                marketService.getStockNews(ticker)
+            ]);
+            console.log(`✅ Market data fetched successfully for ${ticker}`);
+        } catch (marketError) {
+            console.error('❌ Market data fetch failed:', marketError.message);
+            
+            // Return fallback data when APIs fail
+            const fallbackData = {
+                price: 150.00,
+                rsi: 50,
+                sma20: 148.50,
+                ema20: 149.25,
+                volumeAnomaly: false,
+                trend: "Sideways",
+                overall_sentiment_score: 0,
+                sentiment_label: 'Neutral',
+                confidence_score: 50,
+                positive_factors: ['Market data temporarily unavailable'],
+                negative_factors: ['Using fallback mode'],
+                reasoning_summary: `Unable to fetch real-time data for ${ticker}. This is fallback data. Please try again later.`,
+                recommendation: 'Hold',
+                risk_level: 'Medium',
+                market_data: {
+                    open: 150.00,
+                    high: 152.00,
+                    low: 148.00,
+                    volume: 1000000,
+                    marketCap: 2500000000000
+                },
+                history: [],
+                news: []
+            };
+            
+            res.json(fallbackData);
+            return;
+        }
 
         if (!history || history.length < 50) {
             res.status(400).json({ error: 'Not enough historical data for analysis' });
