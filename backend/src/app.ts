@@ -11,6 +11,18 @@ app.use(express.json());
 // Routes
 app.use('/api', apiRoutes);
 
+// Simple test endpoint
+app.get('/api/test', (req, res) => {
+    res.json({
+        status: 'OK',
+        message: 'Backend is working',
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'unknown',
+        hasGeminiKey: !!process.env.GEMINI_API_KEY,
+        geminiKeyLength: process.env.GEMINI_API_KEY?.length || 0
+    });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ 

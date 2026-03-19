@@ -4,6 +4,15 @@ import { analyzeStock, analyzeSentiment } from '../controllers/analysisControlle
 
 const router = Router();
 
+// Test Routes
+router.get('/test', (req, res) => {
+    res.json({
+        status: 'OK',
+        message: 'API routes are working',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Stock Data Routes
 router.get('/stock/:ticker', getStockData);
 router.get('/news/:ticker', getStockNews);
